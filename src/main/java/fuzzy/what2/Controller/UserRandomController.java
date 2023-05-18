@@ -1,9 +1,13 @@
 package fuzzy.what2.Controller;
 
+import fuzzy.what2.Model.Element;
+import fuzzy.what2.Model.User;
+import fuzzy.what2.Model.UsersElement;
 import fuzzy.what2.Model.UsersGroup;
 import fuzzy.what2.Service.UsersRandomService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.annotation.PostConstruct;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +23,29 @@ public class UserRandomController {
     public List<UsersGroup> getMyGroups(){
         return service.getMyGroups();
     }
+    @PostMapping("/createNewGroup")
+    public String createNewGroup(@RequestParam Long userId, @RequestParam String groupName){
+        return service.createNewGroup(userId, groupName);
+    }
+
+    @PostMapping("/addElementToUserGroup")
+    public String addElementToUserGroup(@RequestParam Long userId, @RequestParam String groupName, @RequestParam String elementName){
+        service.addElementToUserGroup(userId, groupName, elementName);
+        return service.checkElementFromGroup(userId, groupName, elementName);
+    }
 
 
+    @PostMapping("/createUser")
+    public String createUser(User user){
+        return service.createUser(user);
+    }
+    @DeleteMapping("/deleteUserById")
+    public String deleteUserById(@RequestParam Long userId){
+        return service.deleteUserById(userId);
+    }
+    @GetMapping("/getAllElementsFromGroup")
+    public List<UsersElement> getAllElementsFromGroup(@RequestParam Long userId, @RequestParam String groupName){
+        return service.getAllElementsFromGroup(userId, groupName);
+    }
 
 }

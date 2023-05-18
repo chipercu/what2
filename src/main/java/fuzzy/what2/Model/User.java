@@ -17,9 +17,15 @@ public class User {
 
     private String login;
     private String password;
+    private Boolean isActive;
 
     @OneToMany()
-    private List<Group> individualGroup;
+    private List<UsersGroup> individualGroup;
+
+
+    public UsersGroup createNewGroup(String groupName){
+        return new UsersGroup(groupName, this);
+    }
 
 
 
