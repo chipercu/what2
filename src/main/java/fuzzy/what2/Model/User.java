@@ -19,7 +19,8 @@ public class User {
     private String password;
     private Boolean isActive;
 
-    @OneToMany()
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_randomizer")
     private List<UsersGroup> individualGroup;
 
 

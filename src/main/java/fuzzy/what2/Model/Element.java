@@ -15,7 +15,7 @@ public class Element {
 
     private String img;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Group group;
 
 

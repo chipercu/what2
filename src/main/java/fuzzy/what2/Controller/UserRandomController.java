@@ -1,12 +1,9 @@
 package fuzzy.what2.Controller;
 
-import fuzzy.what2.Model.Element;
 import fuzzy.what2.Model.User;
 import fuzzy.what2.Model.UsersElement;
 import fuzzy.what2.Model.UsersGroup;
 import fuzzy.what2.Service.UsersRandomService;
-import jakarta.annotation.PostConstruct;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,8 +33,8 @@ public class UserRandomController {
 
 
     @PostMapping("/createUser")
-    public String createUser(User user){
-        return service.createUser(user);
+    public String createUser(User User){
+        return service.createUser(User);
     }
     @DeleteMapping("/deleteUserById")
     public String deleteUserById(@RequestParam Long userId){

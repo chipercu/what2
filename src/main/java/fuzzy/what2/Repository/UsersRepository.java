@@ -8,7 +8,6 @@ import java.util.Optional;
 public interface UsersRepository extends JpaRepository<User, Long> {
 
     User getUserById(Long id);
-
     User getUserByLogin(String login);
 
 }

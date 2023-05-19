@@ -51,16 +51,16 @@ public class UsersRandomService {
     }
 
     private Optional<User> getUserFromDB(Long userId){
-        User user = usersRepository.getUserById(userId);
-        if (user != null){
-            return Optional.of(user);
+        User User = usersRepository.getUserById(userId);
+        if (User != null){
+            return Optional.of(User);
         }
         return Optional.empty();
     }
     private Optional<User> getUserFromDB(String login){
-        User user = usersRepository.getUserByLogin(login);
-        if (user != null){
-            return Optional.of(user);
+        User User = usersRepository.getUserByLogin(login);
+        if (User != null){
+            return Optional.of(User);
         }
         return Optional.empty();
     }
@@ -136,14 +136,14 @@ public class UsersRandomService {
         }
     }
 
-    public String createUser(User user){
-        Optional<User> userFromDB = getUserFromDB(user.getLogin());
+    public String createUser(User User){
+        Optional<User> userFromDB = getUserFromDB(User.getLogin());
         if (userFromDB.isPresent()){
             return "Пользователь " + userFromDB.get().getLogin() + " уже существует";
         }else {
-            if (checkNull(user.getLogin(), user.getPassword()) && checkEmpty(user.getLogin(), user.getPassword())){
-                User user1 = usersRepository.saveAndFlush(user);
-                return "Пользователь " + user1.getLogin() + " был успешно зарегистрирован";
+            if (checkNull(User.getLogin(), User.getPassword()) && checkEmpty(User.getLogin(), User.getPassword())){
+                User User1 = usersRepository.saveAndFlush(User);
+                return "Пользователь " + User1.getLogin() + " был успешно зарегистрирован";
             }else {
                 return "Пользователь не был зарегистрирован, пустой логин или пароль";
             }

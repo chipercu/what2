@@ -3,11 +3,11 @@ package fuzzy.what2.Controller;
 
 import fuzzy.what2.Model.Element;
 import fuzzy.what2.Model.Group;
+import fuzzy.what2.Model.Randomizer;
+import fuzzy.what2.Model.RandomizerElement;
 import fuzzy.what2.Service.RandomService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import fuzzy.what2.Service.RandomizerService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,10 +15,39 @@ import java.util.List;
 public class RandomController {
 
     private final RandomService service;
+    private final RandomizerService randomizerService;
 
-    public RandomController(RandomService service) {
+    public RandomController(RandomService service, RandomizerService randomizerService) {
         this.service = service;
+        this.randomizerService = randomizerService;
     }
+
+
+    @PostMapping("/addRandomizer")
+    public Boolean addRandomizer(@RequestParam(required = false) Long userId, @RequestParam(required = false) String name){
+        return randomizerService.addRandomizer(userId, name);
+    }
+    @GetMapping("/getAllRandomizer")
+    public List<Randomizer> getAllRandomizer(@RequestParam(required = false) Long userId){
+        return randomizerService.getAllRandomizer(userId);
+    }
+    @PostMapping("/addElementToRandomizer")
+    public Boolean addElementToRandomizer(@RequestParam(required = false) Long userId,
+                                          @RequestParam(required = false) String randomizer,
+                                          @RequestParam(required = false) String name){
+        return randomizerService.addElementToRandomizer(userId, randomizer, name);
+    }
+    @GetMapping("/getAllElementsFromRandomizer")
+    public List<RandomizerElement> getAllElementsFromRandomizer(@RequestParam(required = false) Long userId,
+                                                                 @RequestParam(required = false) String randomizer){
+        return randomizerService.getAllElementsFromRandomizer(userId, randomizer);
+    }
+    @GetMapping("/getRandomElementFromRandomizer")
+    public String getRandomElementFromRandomizer(@RequestParam(required = false) Long userId,
+                                                 @RequestParam(required = false) String randomizer){
+        return randomizerService.getRandomElementFromRandomizer(userId, randomizer);
+    }
+
 
     @GetMapping("/getRandomByGroup")
     public Element getRandomByGroup(@RequestParam(required = false, defaultValue = "random") String name) {

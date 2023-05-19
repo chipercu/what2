@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface UsersGroupRepository extends JpaRepository<UsersGroup, Long> {
 
-    Optional<UsersGroup> getUsersGroupByNameAndUser(String name, User user);
+    Optional<UsersGroup> getUsersGroupByNameAndUser(String name, User User);
 
 
 }

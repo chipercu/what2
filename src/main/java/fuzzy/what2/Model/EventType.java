@@ -16,7 +16,7 @@ public class EventType {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Group> groupList;
 
 
